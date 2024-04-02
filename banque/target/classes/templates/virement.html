@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Effectuer un Virement</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<a href="/" class="retour-accueil">Retour à l'accueil</a>
+<h1>Effectuer un Virement</h1>
+<form th:action="@{/api/compte/virement}" th:object="${virementDto}" method="post">
+    <div>
+        <label for="emetteur">Compte Émetteur:</label>
+        <select id="emetteur" name="emetteur" required>
+            <option th:each="compte : ${comptes}" th:value="${compte.id}"
+                    th:text="${compte.client.nom + ' ' + compte.client.prenom + ' - ' + compte.id}">
+            </option>
+        </select>
+    </div>
+    <div>
+        <label for="beneficiaire">Compte Bénéficiaire:</label>
+        <select id="beneficiaire" name="beneficiaire" required>
+            <option th:each="compte : ${comptes}" th:value="${compte.id}"
+                    th:text="${compte.client.nom + ' ' + compte.client.prenom + ' - ' + compte.id}">
+            </option>
+        </select>
+    </div>
+    <div>
+        <label for="montant">Montant:</label>
+        <input id="montant" name="montant" type="number" required/>
+    </div>
+    <div>
+        <input type="submit" value="Effectuer le Virement"/>
+    </div>
+</form>
+</body>
+</html>
