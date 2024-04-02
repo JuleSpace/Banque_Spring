@@ -25,6 +25,8 @@
     <thead>
       <tr>
         <th>Id</th>
+        <th>Nom Client</th>
+        <th>Prénom Client</th>
         <th>Solde</th>
         <th>Taux</th>
         <th>Supprimer</th>
@@ -35,6 +37,8 @@
     <tbody>
       <tr th:each="compte : ${comptes}">
         <td th:text="${compte.id}"></td>
+        <td th:text="${compte.client.nom}"></td>
+        <td th:text="${compte.client.prenom}"></td>
         <td th:text="${compte.solde}"></td>
         <td th:text="${compte.taux}"></td>
         <td>
