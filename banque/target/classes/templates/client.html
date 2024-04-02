@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<a href="/" class="retour-accueil">Retour à l'accueil</a>
+  <form action="/client/creer" method="post" th:object="${client}">
+    <label for="nom">Nom</label>
+    <input id="nom" name="nom" th:field="*{nom}" type="text">
+    <br>
+    <label for="prenom">Prénom</label>
+    <input id="prenom" name="prenom" th:field="*{prenom}" type="text">
+    <br>
+    <input type="submit" value="Créer">
+  </form>
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Nom</th>
+        <th>Prenom</th>
+        <th>Supprimer</th>
+        <th>Détail</th>
+        <th>Editer</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="client : ${clients}">
+        <td th:text="${client.id}"></td>
+        <td th:text="${client.nom}"></td>
+        <td th:text="${client.prenom}"></td>
+        <td>
+          <form action="/client/effacer" method="post">
+            <input type="hidden" name="idClient" th:value="${client.id}">
+            <input type="submit" value="Supprimer">
+          </form>
+        </td>
+        <td><a th:href="'/client/lister/' + ${client.id}">Détail</a></td>
+        <td>
+          <form action="/client/editer" method="post">
+            <input id="id-edit" name="id" type="hidden" th:value="${client.id}">
+            <input id="nom-edit" name="nom" type="hidden" th:value="${client.nom}">
+            <input id="prenom-edit" name="prenom" type="hidden" th:value="${client.prenom}">
+            <input type="submit" value="Modifier">
+          </form>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

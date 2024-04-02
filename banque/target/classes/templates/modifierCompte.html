@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier compte</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<a href="/" class="retour-accueil">Retour à l'accueil</a>
+<h1>Modifier le compte : </h1>
+<form action="/compte/editer/submit" method="post" th:object="${compte}">
+    <input id="id" name="id" th:field="*{id}" type="hidden">
+    <label for="solde">Solde</label>
+    <input id="solde" name="solde" th:field="*{solde}" type="text">
+    <br><br>
+    <label for="taux">Taux</label>
+    <input id="taux" name="taux" th:field="*{taux}" type="text">
+    <br><br>
+    <label for="client">Client</label>
+    <select id="client" name="client" th:field="*{client}" required>
+        <option th:each="clt : ${clients}" th:text="${clt.nom + ' ' + clt.prenom}" th:value="${clt.id}" th:selected="${clt.id==compte.client.id}"></option>
+    </select>
+    <br><br>
+    <input type="submit" value="Modifier">
+</form>
+</body>
+</html>
